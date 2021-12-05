@@ -1,3 +1,21 @@
-<p>
-  edit-person-phone works!
-</p>
+<div class="col-md-6">
+  <h2 class="text-center">Editar número de telefone</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="phoneNumber">Número de telefone:</label>
+      <input type="phoneNumber" formControlName="phoneNumber" placeholder="Numero de telefone" name="phoneNumber" class="form-control" id="phoneNumber">
+    </div>
+
+    <div class="form-group">
+      <label for="businessEntityID">Entidade de negócio:</label>
+      <input formControlName="businessEntityID" placeholder="Entidade de negocio" name="businessEntityID" class="form-control" id="businessEntityID">
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumberTypeID">Tipo de número de telefone:</label>
+      <input formControlName="phoneNumberTypeID" placeholder="Tipo de numero de telefone" name="phoneNumberTypeID" class="form-control" id="phoneNumberTypeID">
+    </div>
+
+    <button class="btn btn-success">Atualizar</button>
+  </form>
+</div>

@@ -26,6 +26,7 @@ namespace Examples.Charge.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors();
             services.AddDbContext<ExampleContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -81,6 +82,8 @@ namespace Examples.Charge.API
 
 
             app.UseMvc();
+
+            app.UseCors(option => option.AllowAnyOrigin());
         }
 
     }

@@ -1,4 +1,4 @@
-export class User {
+export class PersonPhone {
 
     businessEntityID: number;
     phoneNumber: string;

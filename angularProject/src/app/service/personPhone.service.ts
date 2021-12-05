@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {User} from "../model/user.model";
+import {PersonPhone} from "../model/personPhone.model";
 
 @Injectable()
-export class UserService {
+export class PersonPhoneService {
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://localhost:8080/user-portal/users';
+  baseUrl: string = 'http://localhost:55273/api/personPhone';
 
-  getUsers() {
-    return this.http.get<User[]>(this.baseUrl);
+  getPersonPhones() {
+    return this.http.get<PersonPhone[]>(this.baseUrl);
   }
 
-  getUserById(id: number) {
-    return this.http.get<User>(this.baseUrl + '/' + id);
+  getPersonPhoneById(id: number) {
+    return this.http.get<PersonPhone>(this.baseUrl + '/' + id);
   }
 
-  createUser(user: User) {
-    return this.http.post(this.baseUrl, user);
+  createPersonPhone(personPhone: PersonPhone) {
+    return this.http.post(this.baseUrl, personPhone);
   }
 
-  updateUser(user: User) {
-    return this.http.put(this.baseUrl + '/' + user.id, user);
+  updatePersonPhone(personPhone: PersonPhone) {
+    return this.http.put(this.baseUrl, personPhone);
   }
 
-  deleteUser(id: number) {
+  deletePersonPhone(id: string) {
     return this.http.delete(this.baseUrl + '/' + id);
   }
 }

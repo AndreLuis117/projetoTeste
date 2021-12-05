@@ -1,3 +1,22 @@
-<p>
-  list-person-phone works!
-</p>
+<div class="col-md-6">
+  <h2> Números de telefone</h2>
+  <button class="btn btn-danger" (click)="addPersonPhone()">Adicionar novo número de telefone</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Entidade de negócio</th>
+      <th>Número de telephone</th>
+      <th>Tipo do número de telefone</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let phoneNumber of phoneNumbers">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><button class="btn btn-danger" (click)="deletePersonPhone(phoneNumber)"> Delete</button>
+      <button class="btn btn-danger" (click)="editPersonPhone(phoneNumber)" style="margin-left: 20px;"> Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
