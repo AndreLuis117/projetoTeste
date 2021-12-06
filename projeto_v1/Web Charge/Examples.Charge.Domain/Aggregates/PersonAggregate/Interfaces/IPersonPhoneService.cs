@@ -9,7 +9,7 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate.Interfaces
     {
         Task<List<PersonPhone>> FindAllAsync();
 
-        Task<PersonPhone> GetByIdAsync(string id);
+        Task<PersonPhone> GetByPhoneNumberAsync(string phoneNumber);
 
         Task AddAsync(PersonPhone entity);
         Task UpdateAsync(PersonPhone entity);

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {PersonPhoneService} from "../service/personPhone.service";
-import {PersonPhone} from "../model/personPhone.model";
+import {PersonPhoneObject} from "../model/PersonPhoneObject";
+
 
 @Component({
   selector: 'app-list-person-phone',
@@ -10,27 +11,32 @@ import {PersonPhone} from "../model/personPhone.model";
 })
 export class ListPersonPhoneComponent implements OnInit {
 
-  personPhones: PersonPhone[];
+  personPhones: PersonPhoneObject[];
 
   constructor(private router: Router, private personPhoneService: PersonPhoneService) { }
 
   ngOnInit() {
     this.personPhoneService.getPersonPhones()
       .subscribe( data => {
-        this.personPhones = data;
+        console.log(data);
+        this.personPhones = data.data.personPhoneObjects;
+        console.log(this.personPhones);
       });
   }
 
-  deletePersonPhone(personPhone: PersonPhone): void {
+  deletePersonPhone(personPhone: PersonPhoneObject): void {
     this.personPhoneService.deletePersonPhone(personPhone.phoneNumber)
       .subscribe( data => {
         this.personPhones = this.personPhones.filter(u => u !== personPhone);
       })
   };
 
-  editPersonPhone(personPhone: PersonPhone): void {
-    localStorage.removeItem("editpersonPhoneId");
-    localStorage.setItem("editPersonPhoneId", personPhone.phoneNumber.toString());
+  editPersonPhone(personPhone: PersonPhoneObject): void {
+    localStorage.removeItem("editPersonPhoneId");
+    console.log(personPhone.phoneNumber);
+    localStorage.setItem("editPersonPhoneId", personPhone.phoneNumber);
+    console.log(localStorage.getItem("editPersonPhoneId"));
+
     this.router.navigate(['edit-person-phone']);
   };
 

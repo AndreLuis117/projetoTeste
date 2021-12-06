@@ -18,10 +18,9 @@ export class AddPersonPhoneComponent implements OnInit {
   ngOnInit() {
 
     this.addForm = this.formBuilder.group({
-      id: [],
-      email: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
+      phoneNumber: [],
+      businessEntityID: ['', Validators.required],
+      phoneNumberTypeID: ['', Validators.required],
     });
 
   }

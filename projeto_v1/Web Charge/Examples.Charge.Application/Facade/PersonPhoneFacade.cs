@@ -33,9 +33,9 @@ namespace Examples.Charge.Application.Facade
             return response;
         }
 
-        public async Task<PersonPhoneResponse> FindByIdAsync(string id)
+        public async Task<PersonPhoneResponse> FindByPhoneNumberAsync(string phoneNumber)
         {
-            var result = await _personPhoneService.GetByIdAsync(id);
+            var result = await _personPhoneService.GetByPhoneNumberAsync(phoneNumber);
             var response = new PersonPhoneResponse();
             response.PersonPhoneObjects = new List<PersonPhoneDto>();
             response.PersonPhoneObjects.Add(_mapper.Map<PersonPhoneDto>(result));
@@ -47,13 +47,16 @@ namespace Examples.Charge.Application.Facade
             await _personPhoneService.AddAsync(_mapper.Map<PersonPhone>(request));
         }
 
-        public async Task UpdateAsync(PersonPhoneRequest request)
+        public async Task UpdateAsync(PersonPhoneRequest request, string oldPhoneNumber)
         {
-            await _personPhoneService.UpdateAsync(_mapper.Map<PersonPhone>(request));
+            await RemoveAsync(oldPhoneNumber);
+
+            await _personPhoneService.AddAsync(_mapper.Map<PersonPhone>(request));
         }
-        public async Task RemoveAsync(PersonPhoneRequest request)
+        public async Task RemoveAsync(string phoneNumber)
         {
-            await _personPhoneService.RemoveAsync(_mapper.Map<PersonPhone>(request));
+            var result = await _personPhoneService.GetByPhoneNumberAsync(phoneNumber);
+            await _personPhoneService.RemoveAsync(result);
         }
     }
 }

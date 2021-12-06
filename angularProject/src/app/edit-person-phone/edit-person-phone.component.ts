@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {PersonPhoneService} from "../service/personPhone.service";
 import {Router} from "@angular/router";
-import {PersonPhone} from "../model/personPhone.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
+import {PersonPhoneObject} from "../model/PersonPhoneObject";
+
 
 @Component({
   selector: 'app-edit-person-phone',
@@ -12,31 +13,33 @@ import {first} from "rxjs/operators";
 })
 export class EditPersonPhoneComponent implements OnInit {
 
-  personPhone: PersonPhone;
+  personPhone: PersonPhoneObject;
   editForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private router: Router, private personPhoneService: PersonPhoneService) { }
 
   ngOnInit() {
-    let userId = localStorage.getItem("editUserId");
-    if(!userId) {
-      alert("Invalid action.")
-      this.router.navigate(['list-user']);
+    let phoneNumber = localStorage.getItem("editPersonPhoneId");
+    console.log(localStorage.getItem("editPersonPhoneId"));
+    if(!phoneNumber) {
+      alert("Ocorreu um problema na aplicação!")
+      this.router.navigate(['list-phone-number']);
       return;
     }
     this.editForm = this.formBuilder.group({
-      id: [],
-      email: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
+      phoneNumber: [],
+      businessEntityID: ['', Validators.required],
+      phoneNumberTypeID: ['', Validators.required],
     });
-    this.personPhoneService.getPersonPhoneById(+userId)
+    this.personPhoneService.getPersonPhoneById(phoneNumber)
       .subscribe( data => {
-        this.editForm.setValue(data);
+        this.editForm.setValue(data.data.personPhoneObjects[0]);
       });
   }
 
   onSubmit() {
-    this.personPhoneService.updatePersonPhone(this.editForm.value)
+    let phoneNumber = localStorage.getItem("editPersonPhoneId");
+
+    this.personPhoneService.updatePersonPhone(this.editForm.value, phoneNumber)
       .pipe(first())
       .subscribe(
         data => {

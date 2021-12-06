@@ -26,10 +26,10 @@ namespace Examples.Charge.API.Controllers
         [HttpGet]
         public async Task<ActionResult<PersonPhoneResponse>> Get() => Response(await _facade.FindAllAsync());
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PersonPhoneResponse>> Get(string id)
+        [HttpGet("{phoneNumber}")]
+        public async Task<ActionResult<PersonPhoneResponse>> Get(string phoneNumber)
         {
-            return Response(await _facade.FindByIdAsync(id));
+            return Response(await _facade.FindByPhoneNumberAsync(phoneNumber));
         }
 
         [HttpPost]
@@ -49,16 +49,15 @@ namespace Examples.Charge.API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
-            return BadRequest();
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] PersonPhoneRequest request)
+        [HttpPut("{oldPhoneNumber}")]
+        public async Task<IActionResult> Put([FromBody] PersonPhoneRequest request, string oldPhoneNumber)
         {
             try
             {
 
-                await _facade.UpdateAsync(request);
+                await _facade.UpdateAsync(request, oldPhoneNumber);
 
                 return this.StatusCode(StatusCodes.Status200OK);
 
@@ -69,16 +68,15 @@ namespace Examples.Charge.API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
-            return BadRequest();
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] PersonPhoneRequest request)
+        [HttpDelete("{phoneNumber}")]
+        public async Task<IActionResult> Delete(string phoneNumber)
         {
             try
             {
 
-                await _facade.RemoveAsync(request);
+                await _facade.RemoveAsync(phoneNumber);
 
                 return this.StatusCode(StatusCodes.Status200OK);
 
@@ -89,7 +87,6 @@ namespace Examples.Charge.API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
 
-            return BadRequest();
         }
     }
 }

@@ -11,10 +11,10 @@ namespace Examples.Charge.Application.Interfaces
     {
         Task<PersonPhoneResponse> FindAllAsync();
 
-        Task<PersonPhoneResponse> FindByIdAsync(string id);
+        Task<PersonPhoneResponse> FindByPhoneNumberAsync(string phoneNumber);
         Task AddAsync(PersonPhoneRequest request);
-        Task UpdateAsync(PersonPhoneRequest request);
-        Task RemoveAsync(PersonPhoneRequest request);
+        Task UpdateAsync(PersonPhoneRequest request, string oldPhoneNumber);
+        Task RemoveAsync(string phoneNumber);
         
     }
 }

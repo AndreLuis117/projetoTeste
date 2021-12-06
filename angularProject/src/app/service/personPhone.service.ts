@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {PersonPhone} from "../model/personPhone.model";
+import {RootObject} from "../model/RootObject";
+import {PersonPhoneObject} from "../model/PersonPhoneObject";
+
+
+
 
 @Injectable()
 export class PersonPhoneService {
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://localhost:55273/api/personPhone';
+  baseUrl: string = 'http://localhost:52284/api/personPhone';
 
   getPersonPhones() {
-    return this.http.get<PersonPhone[]>(this.baseUrl);
+    return this.http.get<RootObject>(this.baseUrl);
   }
 
-  getPersonPhoneById(id: number) {
-    return this.http.get<PersonPhone>(this.baseUrl + '/' + id);
+  getPersonPhoneById(phoneNumber: string) {
+    return this.http.get<RootObject>(this.baseUrl + '/' + phoneNumber);
   }
 
-  createPersonPhone(personPhone: PersonPhone) {
+  createPersonPhone(personPhone: PersonPhoneObject) {
     return this.http.post(this.baseUrl, personPhone);
   }
 
-  updatePersonPhone(personPhone: PersonPhone) {
-    return this.http.put(this.baseUrl, personPhone);
+  updatePersonPhone(personPhone: PersonPhoneObject, phoneNumber) {
+    return this.http.put(this.baseUrl + '/' + phoneNumber, personPhone);
   }
 
-  deletePersonPhone(id: string) {
-    return this.http.delete(this.baseUrl + '/' + id);
+  deletePersonPhone(phoneNumber: string) {
+    return this.http.delete(this.baseUrl + '/' + phoneNumber);
   }
 }

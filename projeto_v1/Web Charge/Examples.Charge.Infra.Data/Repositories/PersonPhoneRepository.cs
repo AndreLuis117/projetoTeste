@@ -19,9 +19,9 @@ namespace Examples.Charge.Infra.Data.Repositories
 
         public async Task<IEnumerable<PersonPhone>> FindAllAsync() => await Task.Run(() => _context.PersonPhone);
 
-        public Task<PersonPhone> GetByIdAsync(string id)
+        public Task<PersonPhone> GetByPhoneNumberAsync(string phoneNumber)
         {
-            return _context.Set<PersonPhone>().FindAsync(id);
+            return _context.Set<PersonPhone>().FirstAsync(x => x.PhoneNumber == phoneNumber);
         }
 
 

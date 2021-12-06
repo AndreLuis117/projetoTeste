@@ -15,9 +15,9 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate
 
         public async Task<List<PersonPhone>> FindAllAsync() => (await _personPhoneRepository.FindAllAsync()).ToList();
 
-        public async Task<PersonPhone> GetByIdAsync(string id)
+        public async Task<PersonPhone> GetByPhoneNumberAsync(string phoneNumber)
         {
-            return await _personPhoneRepository.GetByIdAsync(id);
+            return await _personPhoneRepository.GetByPhoneNumberAsync(phoneNumber);
         }
 
 
@@ -28,7 +28,7 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate
 
         public async Task UpdateAsync(PersonPhone entity)
         {
-            _personPhoneRepository.UpdateAsync(entity);
+            await _personPhoneRepository.UpdateAsync(entity);
         }
 
         public async Task RemoveAsync(PersonPhone entity)

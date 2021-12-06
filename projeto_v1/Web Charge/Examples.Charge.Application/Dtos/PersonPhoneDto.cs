@@ -12,7 +12,7 @@ namespace Examples.Charge.Application.Dtos
 
         public int PhoneNumberTypeID { get; set; }
 
-        public PhoneNumberTypeDto PhoneNumberType { get; set; }
+        //public PhoneNumberTypeDto PhoneNumberType { get; set; }
 
     }
 }

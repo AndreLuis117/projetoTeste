@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace Examples.Charge.API
 {
@@ -25,8 +26,9 @@ namespace Examples.Charge.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<ExampleContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -34,6 +36,8 @@ namespace Examples.Charge.API
             });
             NativeInjector.Setup(services);
             services.AddAutoMapper();
+
+            
 
             services.AddSwaggerGen(options =>
             {
@@ -80,10 +84,10 @@ namespace Examples.Charge.API
                 options.DisplayRequestDuration();
             });
 
+            app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseMvc();
 
-            app.UseCors(option => option.AllowAnyOrigin());
         }
 
     }

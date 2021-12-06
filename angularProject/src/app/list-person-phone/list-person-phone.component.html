@@ -10,12 +10,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let phoneNumber of phoneNumbers">
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button class="btn btn-danger" (click)="deletePersonPhone(phoneNumber)"> Delete</button>
-      <button class="btn btn-danger" (click)="editPersonPhone(phoneNumber)" style="margin-left: 20px;"> Edit</button></td>
+    <tr *ngFor="let phoneNumber of personPhones">
+      <td>{{phoneNumber.businessEntityID}}</td>
+      <td>{{phoneNumber.phoneNumber}}</td>
+      <td>{{phoneNumber.phoneNumberTypeID}}</td>
+      <td><button class="btn btn-danger" (click)="deletePersonPhone(phoneNumber)"> Deletar</button></td>
+      <td><button class="btn btn-danger" (click)="editPersonPhone(phoneNumber)" style="margin-left: 20px;">Editar</button></td>
     </tr>
     </tbody>
   </table>
