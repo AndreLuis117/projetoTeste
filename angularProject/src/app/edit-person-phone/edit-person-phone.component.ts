@@ -3,7 +3,7 @@ import {PersonPhoneService} from "../service/personPhone.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
-import {PersonPhoneObject} from "../model/PersonPhoneObject";
+import {PersonPhoneObject} from "../model/PersonPhone/PersonPhoneObject";
 
 
 @Component({

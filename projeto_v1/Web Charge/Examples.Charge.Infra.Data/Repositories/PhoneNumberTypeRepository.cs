@@ -1,6 +1,7 @@
 ﻿using Examples.Charge.Domain.Aggregates.PersonAggregate;
 using Examples.Charge.Domain.Aggregates.PersonAggregate.Interfaces;
 using Examples.Charge.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,5 +18,10 @@ namespace Examples.Charge.Infra.Data.Repositories
         }
 
         public async Task<IEnumerable<PhoneNumberType>> FindAllAsync() => await Task.Run(() => _context.PhoneNumberType);
+
+        public async Task<PhoneNumberType> FindByIdAsync(int id)
+        {
+            return await _context.Set<PhoneNumberType>().FirstAsync(x => x.PhoneNumberTypeID == id);
+        }
     }
 }
