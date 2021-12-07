@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PersonPhoneService} from "../service/personPhone.service";
 import {first} from "rxjs/operators";
 import {Router} from "@angular/router";
+import { PhoneNumberTypeObject } from '../model/PhoneNumberType/PhoneNumberTypeObject';
+import { PhoneNumberTypeService } from '../service/phoneNumberTypeService';
 
 @Component({
   selector: 'app-add-person-phone',
@@ -11,9 +13,14 @@ import {Router} from "@angular/router";
 })
 export class AddPersonPhoneComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private router: Router, private personPhoneService: PersonPhoneService) { }
+  constructor(private formBuilder: FormBuilder,
+                      private router: Router, 
+                      private personPhoneService: PersonPhoneService,
+                      private phoneNumberTypeService: PhoneNumberTypeService) { }
 
   addForm: FormGroup;
+  phoneNumberTypes: PhoneNumberTypeObject[];
+
 
   ngOnInit() {
 
@@ -22,6 +29,11 @@ export class AddPersonPhoneComponent implements OnInit {
       businessEntityID: ['', Validators.required],
       phoneNumberTypeID: ['', Validators.required],
     });
+
+    this.phoneNumberTypeService.getPhoneNumberTypes()
+      .subscribe( data => {
+        this.phoneNumberTypes = data.data.phoneNumberTypeObjects;
+      });
 
   }
 

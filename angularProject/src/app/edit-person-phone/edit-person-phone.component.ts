@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {PersonPhoneObject} from "../model/PersonPhone/PersonPhoneObject";
+import { PhoneNumberTypeObject } from '../model/PhoneNumberType/PhoneNumberTypeObject';
+import { PhoneNumberTypeService } from '../service/phoneNumberTypeService';
 
 
 @Component({
@@ -13,9 +15,13 @@ import {PersonPhoneObject} from "../model/PersonPhone/PersonPhoneObject";
 })
 export class EditPersonPhoneComponent implements OnInit {
 
+  phoneNumberTypes: PhoneNumberTypeObject[];
   personPhone: PersonPhoneObject;
   editForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,private router: Router, private personPhoneService: PersonPhoneService) { }
+  constructor(private formBuilder: FormBuilder,
+                                    private router: Router, 
+                                    private personPhoneService: PersonPhoneService,
+                                    private phoneNumberTypeService: PhoneNumberTypeService) { }
 
   ngOnInit() {
     let phoneNumber = localStorage.getItem("editPersonPhoneId");
@@ -33,6 +39,10 @@ export class EditPersonPhoneComponent implements OnInit {
     this.personPhoneService.getPersonPhoneById(phoneNumber)
       .subscribe( data => {
         this.editForm.setValue(data.data.personPhoneObjects[0]);
+      });
+      this.phoneNumberTypeService.getPhoneNumberTypes()
+      .subscribe( data => {
+        this.phoneNumberTypes = data.data.phoneNumberTypeObjects;
       });
   }
 

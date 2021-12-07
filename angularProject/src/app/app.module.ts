@@ -11,6 +11,7 @@ import { EditPersonPhoneComponent } from './edit-person-phone/edit-person-phone.
 import { AddPersonPhoneComponent } from './add-person-phone/add-person-phone.component';
 import {routing} from "./app.routing";
 import {PersonPhoneService} from "./service/personPhone.service";
+import { PhoneNumberTypeService } from './service/phoneNumberTypeService';
 
 
 
@@ -28,7 +29,7 @@ import {PersonPhoneService} from "./service/personPhone.service";
     routing,
     HttpClientModule
   ],
-  providers: [PersonPhoneService],
+  providers: [PersonPhoneService, PhoneNumberTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

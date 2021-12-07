@@ -7,7 +7,7 @@ import {PersonPhoneObject} from "../model/PersonPhone/PersonPhoneObject";
 
 
 @Injectable()
-export class PersonPhoneSphoneNumberTypeervice {
+export class PhoneNumberTypeService {
   constructor(private http: HttpClient) { }
   baseUrl: string = 'http://localhost:59230/api/phoneNumberType';
 

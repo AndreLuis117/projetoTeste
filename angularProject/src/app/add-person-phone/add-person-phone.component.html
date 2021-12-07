@@ -13,7 +13,11 @@
 
     <div class="form-group">
       <label for="phoneNumberTypeID">Tipo de número de telefone:</label>
-      <input formControlName="phoneNumberTypeID" placeholder="Tipo de numero de telefone" name="phoneNumberTypeID" class="form-control" id="phoneNumberTypeID">
+      <select formControlName="phoneNumberTypeID" class="form-control" placeholder="Tipo de número de telefone" >
+        <option *ngFor="let phoneNumberType of phoneNumberTypes" placeholder="Tipo de número de telefone" value= {{phoneNumberType.phoneNumberTypeID}} id="phoneNumberTypeID">
+          {{phoneNumberType.name}}
+        </option>
+     </select>
     </div>
 
     <button class="btn btn-success">Adicionar</button>
